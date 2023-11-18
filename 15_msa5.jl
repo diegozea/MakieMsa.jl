@@ -144,4 +144,4 @@ msaplot!(Axis(f[4,1:2]; yreversed=true), msa_show) ## MSA
 ## a2 = read("https://raw.githubusercontent.com/diegozea/MIToS.jl/master/test/data/PF09645_full.stockholm", Stockholm, generatemapping=true, useidcoordinates=false, deletefullgaps=false)
 ## getsequencemapping(a2, "C3N734_SULIY/1-95")
 ## getsequence(a2,4)
-## stringsequence(a3,4) ## ungapped
+## stringsequence(a2,1) 

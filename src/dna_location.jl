@@ -1,6 +1,6 @@
 """
     dna_location
-    Compute coordinates on DNA sequence given location strin indication exon structure
+    Compute coordinates on DNA sequence given location string indication exon structure
     Input:
     dna: a DNA sequence
     location: a location string. Eg join(1..10,15..20)

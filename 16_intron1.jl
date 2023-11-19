@@ -74,6 +74,8 @@ msa_show = @lift(msa1[parse.(Int,$msa_pos),:])
 o_plot_dna!(Axis(f[2,1:3]; yreversed=true,height=80), dna_show, o_dna_pos) ## DNA
 msaplot!(Axis(f[4,1:2]; yreversed=true), msa_show) ## MSA
 
+## DataInspector(Axis(f[2,1:3]))
+
 GLMakie.activate!()
 ## WGLMakie.activate!()
 

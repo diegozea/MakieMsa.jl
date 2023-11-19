@@ -50,7 +50,8 @@ function o_plot_dna!(ax, mat, dna_pos; color_map = clustal_colormap, res_levels 
     p1 = @lift(vec(Point2f.(Tuple.(CartesianIndices($mat)))))
     text!(ax, t1,
           position = p1,
-          align = (:center, :center),
+          align = (:center, :center), # inspector_label
           )
-    hidedecorations!(ax)    
+    hidedecorations!(ax)
+##    DataInspector(ax)
 end

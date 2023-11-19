@@ -37,7 +37,7 @@ dna_pos = dna_positions(gene_model, [1,length(dna4)])
 t1 = translate(dna)
 t2 = translate(dna[2:end-2])
 t3 = translate(dna[3:end-1])
-dna_mat = [v2char(dna) [v2char(t1,"  ") ;[' ', ' ']] [[' '] ;v2char(t2,"  ") ;[ ' ',' ',' ',' ']] [[' ',' '] ;v2char(t3,"  ") ;[ ' ',' ',' ']]]
+dna_mat = [v2char(dna; tolower=true) [v2char(t1,"  ") ;[' ', ' ']] [[' '] ;v2char(t2,"  ") ;[ ' ',' ',' ',' ']] [[' ',' '] ;v2char(t3,"  ") ;[ ' ',' ',' ']]]
 
 
 
@@ -64,14 +64,14 @@ o_dna_pos = @lift(dna_pos_mat[$o_dna_range,:])
 o_codon_pos = @lift(minimum(skipmissing(dna_pos.codon_number[$o_dna_range])))
 msa_pos = @lift(string.($o_codon_pos: min($o_codon_pos + msa_window, msa_length)))
 
-plot_mat!(Axis(f[1,1:3], height = 50*4, yticks = (1:8, names(dna_pos))), o_dna_pos) ## DNA position
+o_plot_mat!(Axis(f[1,1:3], height = 50*4+10, yticks = (1:8, names(dna_pos))), o_dna_pos) ## DNA position
 positions!(Axis(f[5,1:2],height = 50), msa_pos) ## MSA position
 
 ## Compute matrices to show
 dna_show = @lift(dna_mat[$o_dna_range,:])
 msa_show = @lift(msa1[parse.(Int,$msa_pos),:])
 
-msaplot!(Axis(f[2,1:3]; yreversed=true,height=80), dna_show) ## DNA
+o_plot_dna!(Axis(f[2,1:3]; yreversed=true,height=80), dna_show, o_dna_pos) ## DNA
 msaplot!(Axis(f[4,1:2]; yreversed=true), msa_show) ## MSA
 
 GLMakie.activate!()

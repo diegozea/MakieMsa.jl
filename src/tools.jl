@@ -1,4 +1,10 @@
-function v2char(x, sep="") collect.(join(string.(x), sep)) end
+function v2char(x, sep=""; tolower=false)
+    x1 = join(string.(x), sep)
+    if tolower
+        x1 = lowercase(x1)
+    end
+    collect.(x1)
+end
 function div1(x,y) div(x-1,y)+1 end
 
 

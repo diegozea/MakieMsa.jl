@@ -18,7 +18,7 @@
 """
 function dna_positions(exon_location, dna_range)
     @assert( minimum(dna_range) > 0 && dna_range[2] > dna_range[1] )
-    exons = exons_from_location(exon_location)
+    exons = parse_location(exon_location)
     @assert length(exons) >= 1
     dna_pos = Int[]
     state = String[]
@@ -75,18 +75,14 @@ function dna_positions(exon_location, dna_range)
     end
     codon_number = div1.(exon_pos,3)
     codon_pos= mod1.(exon_pos,3)
-    @assert collect(skipmissing(codon_pos))[end] == 3 ## ends in frame
+    if collect(skipmissing(codon_pos))[end] != 3
+        @assert collect(skipmissing(codon_pos))[end] == 3 ## ends in frame
+        @error("Seqence does not end in-frame!")
+    end
     DataFrame(;dna_pos, state, exon_number, exon_pos, intron_number, intron_pos, codon_number, codon_pos)
 end
 
 
-Base.range(m::RegexMatch) = m.offset .+ (0:length(m.match)-1) ## type pirate! From https://discourse.julialang.org/t/find-index-of-all-occurences-of-a-string/23044/8
-
-substring(s::String,v::UnitRange) = s[v]
-function substring(s::String,r::Regex)
-    idx = range.(eachmatch(r, s))
-    substring.(s, idx)
-end
 
 """
     parse_location
@@ -102,6 +98,16 @@ function parse_location(location)
     map(x-> parse.(Int, x), split.(exon_strings, r"\.+")) ## [[123,234],[324,456]]
 end
     
+
+
 function div1(x,y) div(x-1,y)+1 end
 import Base.mod1 ## type pirate!
 mod1(::Missing,x) = missing
+Base.range(m::RegexMatch) = m.offset .+ (0:length(m.match)-1) ## type pirate! From https://discourse.julialang.org/t/find-index-of-all-occurences-of-a-string/23044/8
+
+substring(s::String,v::UnitRange) = s[v]
+function substring(s::String,r::Regex)
+    idx = range.(eachmatch(r, s))
+    substring.(s, idx)
+end
+

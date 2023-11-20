@@ -84,3 +84,7 @@ GLMakie.activate!()
 ## getsequencemapping(a2, "C3N734_SULIY/1-95")
 ## getsequence(a2,4)
 ## stringsequence(a2,1) 
+
+## Serving from Jupyter:
+## https://github.com/SimonDanisch/JSServe.jl
+### example: https://github.com/SimonDanisch/SmartHomy/blob/master/web_app.jl

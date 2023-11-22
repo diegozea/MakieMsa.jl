@@ -56,6 +56,7 @@ msa_length = size(msa1,1)
 f = Figure(fontsize = font_size, resolution = (dna_window*cell_size + padding, 3*msa_seqs*cell_size))
 sl = Makie.Slider(f[3, 1:3], range = 1:length(dna), startvalue = 1) ## Slider
 
+
 ## Compute positions
 dna_pos_mat = replace(string.(Matrix(dna_pos)), "missing" => "", "exon" => "e", "intron" => "i", "UTR" => "u")
 o_dna_range = @lift($(sl.value):min($(sl.value)+dna_window, dna_length))
@@ -74,7 +75,7 @@ msa_show = @lift(msa1[parse.(Int,$msa_pos),:])
 o_plot_dna!(Axis(f[2,1:3]; yreversed=true,height=80), dna_show, o_dna_pos) ## DNA
 msaplot!(Axis(f[4,1:2]; yreversed=true), msa_show) ## MSA
 
-## DataInspector(Axis(f[2,1:3]))
+DataInspector(Axis(f[2,1:3]))
 
 GLMakie.activate!()
 ## WGLMakie.activate!()
@@ -83,7 +84,7 @@ GLMakie.activate!()
 ## a2 = read("https://raw.githubusercontent.com/diegozea/MIToS.jl/master/test/data/PF09645_full.stockholm", Stockholm, generatemapping=true, useidcoordinates=false, deletefullgaps=false)
 ## getsequencemapping(a2, "C3N734_SULIY/1-95")
 ## getsequence(a2,4)
-## stringsequence(a2,1) 
+## stringsequence(a2,1)
 
 ## Serving from Jupyter:
 ## https://github.com/SimonDanisch/JSServe.jl

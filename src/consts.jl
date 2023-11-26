@@ -46,3 +46,15 @@ const dna_levels = OrderedDict(
 )
 const sanger_colormap = tuple.([:green, :blue, :black, :red], 0.5)
 
+exon_colormap = tuple.([:green, :white], 0.5)
+exon_levels_char = OrderedDict(
+    'e' => 1,
+    'i' => 2,
+    'u' => 2,
+)
+exon_levels = OrderedDict(
+    "e" => 1,
+    "i" => 2,
+    "u" => 2,
+    "" => 2,
+)

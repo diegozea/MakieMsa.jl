@@ -58,3 +58,5 @@ exon_levels = OrderedDict(
     "u" => 2,
     "" => 2,
 )
+
+exon_structure_colormap =tuple.([:white, :blue, :green, :yellow])

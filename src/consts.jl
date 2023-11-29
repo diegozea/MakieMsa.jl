@@ -37,7 +37,6 @@ const clustal_levels = OrderedDict(
 )
 const clustal_colormap = tuple.([:blue, :red, :magenta, :green, :pink, :orange, :yellow, :cyan, :white,:green, :blue, :black, :red], 0.5)
 
-
 const dna_levels = OrderedDict(
     'A' => 1,
     'C' => 2,
@@ -47,6 +46,7 @@ const dna_levels = OrderedDict(
 const sanger_colormap = tuple.([:green, :blue, :black, :red], 0.5)
 
 exon_colormap = tuple.([:green, :white], 0.5)
+
 exon_levels_char = OrderedDict(
     'e' => 1,
     'i' => 2,

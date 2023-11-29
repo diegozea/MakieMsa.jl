@@ -1,5 +1,5 @@
 ## Work on sizing
-#using WGLMakie
+using WGLMakie
 using GLMakie
 using DataStructures
 using MIToS
@@ -28,8 +28,14 @@ dna3 = string(dna2)
 intron1 = join(rand(['A','C','G','T'],100))
 intron2 = join(rand(['A','C','G','T'],100))
 intron3 = join(rand(['A','C','G','T'],49))
-gene_model = "1..50,151..200,301..551"
-dna4 = dna3[1:50] * intron1 * dna3[51:100] * intron2 * dna3[101:end] * intron3
+intron4 = join(rand(['A','C','G','T'],51))
+
+gene_model = "101..150,251..300,401..651"
+dna4 = intron1 * dna3[1:50] * intron1 * dna3[51:100] * intron2 * dna3[101:end] * intron4
+
+# gene_model = "1..50,151..200,301..551"
+# dna4 = dna3[1:50] * intron1 * dna3[51:100] * intron2 * dna3[101:end] * intron3
+
 dna = LongDNA{4}(dna4)
 
 dna_pos = dna_positions(gene_model, [1,length(dna4)])

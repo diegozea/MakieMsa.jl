@@ -35,6 +35,7 @@ struct MSA <: AbstractMsa
     identifiers::Vector{String}
     sequences::Vector{String}
 end
+
 struct MSA_window <: AbstractMsa
     filename::String
     identifiers::Vector{String}
@@ -42,14 +43,45 @@ struct MSA_window <: AbstractMsa
     window::Tuple{Int,Int} ## first position, last position
 end
 
+struct MSA_matrix{T}
+    filename::String
+    identifiers::Vector{String}
+    seq_matrix::T 
+    window::Tuple{Int,Int}
+    is_full::Bool ## is the window the full msa?
+end
+
 function read_msa(file)
     records = collect(FASTAReader(open(file,"r")))
     MSA(file,
         string.(identifier.(records)),
-        string.(sequence.(records)),
+        string.(FASTA.sequence.(records)),
         )    
 end
 
+"""
+    msa_matrix(msa::AbstractMsa)
+    convert a MSA obejct to matrix of Char values
+"""
+function msa_matrix(msa::AbstractMsa; reverse_order=false)
+    res = only.(hcat(split.(msa.sequences, "")...))
+    if reverse_order
+        res = res[:,end:-1:1]
+    end
+    res
+end
+
+
+function plot_charmatrix!(ax, mat)
+    p1 = vec(Point2f.(Tuple.(CartesianIndices(mat))))
+    t1 = vec(mat)
+    scatter!(ax, p1,
+             marker = t1,
+             align = (:center, :center),
+             color = :black,
+             )
+     hidedecorations!(ax)
+end
 
 ## plot an msa
 ## Make function that works with static as well as observable input
@@ -59,7 +91,7 @@ function plot_msa!(ax, msa_matrix, color_matrix; hide_decorations=true)
 end
 
 ## slice an msa. This is used with lift to make a scrollable msa.
-function slize_msa(msa, start, end)
+function slize_msa(msa, start_pos, end_pos)
     
 end
 

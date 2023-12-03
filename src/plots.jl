@@ -98,7 +98,7 @@ function o_plot_dna3!(ax, mat, dna_pos; color_map = clustal_colormap, res_levels
     ## TODO: include coloring of reading-frame?
     frame1_true = @lift($dna_pos[:,end] .== "1")
     frame1 = @lift(parse.(Int,$dna_pos[$frame1_true,1]) .- parse(Int,$dna_pos[1,1]) .+ .5)
-    l1 = @lift([m+1 for m in $dna_pos[:,3]]) ## intron, exon
+    l1 = @lift([parse(Int,m)+1 for m in $dna_pos[:,3]]) ## intron, exon
     l2 = @lift(repeat([1], size($dna_pos,1)))
     l4 = @lift(hcat($l1, $l2, $l2, $l2))
     vlines!(ax, frame1, color = (:black,2))

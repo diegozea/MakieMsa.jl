@@ -3,7 +3,7 @@
     Run mafft on input_file with the options writing to output_file
     Return name of output_file
 """
-function mafft(input_file, output_file = tempname(); options = "--auto", quiet = true)
+function mafft(input_file, output_file = tempname(); options = "--auto", quiet = false)
   # High accuracy (for <~200 sequences x <~2,000 aa/nt):
   # % mafft --maxiterate 1000 --localpair  in > out (% linsi in > out is also ok) L-INS-i (Probably most accurate, very slow)
 

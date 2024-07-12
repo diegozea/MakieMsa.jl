@@ -6,7 +6,7 @@ using MIToS.MSA, MIToS.Pfam
 using GLMakie
 using Lazy
 downloadpfam("pf00062")
-msa1 = MIToS.MSA.read("pf00062.stockholm.gz",Stockholm)
+msa1 = MIToS.MSA.read_file("pf00062.stockholm.gz",Stockholm)
 msa2 = Observable(msa1)
 plotdata = plottingdata(msa2)
 fig = Figure(resolution = (1400,400))

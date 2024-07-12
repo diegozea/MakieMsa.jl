@@ -21,7 +21,7 @@ using DataFrames
 # end
 
 
-const msa_pf62 = MIToS.MSA.read("pf00062.stockholm.gz",Stockholm)
+const msa_pf62 = MIToS.MSA.read_file("pf00062.stockholm.gz",Stockholm)
 dna1 = first(FASTAReader(open("s1.fasta")))
 dna2 = sequence(LongDNA{4},dna1)
 dna3 = string(dna2)
@@ -87,7 +87,7 @@ GLMakie.activate!()
 ## WGLMakie.activate!()
 
 ## https://diegozea.github.io/MIToS.jl/latest/MSA/#Column-and-sequence-mappings
-## a2 = read("https://raw.githubusercontent.com/diegozea/MIToS.jl/master/test/data/PF09645_full.stockholm", Stockholm, generatemapping=true, useidcoordinates=false, deletefullgaps=false)
+## a2 = read_file("https://raw.githubusercontent.com/diegozea/MIToS.jl/master/test/data/PF09645_full.stockholm", Stockholm, generatemapping=true, useidcoordinates=false, deletefullgaps=false)
 ## getsequencemapping(a2, "C3N734_SULIY/1-95")
 ## getsequence(a2,4)
 ## stringsequence(a2,1)

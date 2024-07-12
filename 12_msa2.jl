@@ -38,7 +38,7 @@ clustal_levels = OrderedDict(
 )
 clustal_colormap = tuple.([:blue, :red, :magenta, :green, :pink, :orange, :yellow, :cyan, :white], 0.5)
 
-msa_pf62 = MIToS.MSA.read("pf00062.stockholm.gz",Stockholm)
+msa_pf62 = MIToS.MSA.read_file("pf00062.stockholm.gz",Stockholm)
 msa1 = permutedims(Char.(msa_pf62[1:30,:]))
 window = 50
 
